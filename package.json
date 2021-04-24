@@ -1,0 +1,35 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "bundlejs": "browserify index.js -o bundle.js ",
+    "bundlecss": "browserify index.css -o bundle.css ",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viswareddyvy/freshworks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viswareddyvy/freshworks/issues"
+  },
+  "homepage": "https://github.com/viswareddyvy/freshworks#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
+    "jquery": "~3.4.1"
+  },
+  "devDependencies": {
+    "css-loader": "^5.2.4",
+    "jest": "^26.6.3",
+    "jsdom": "^16.5.3",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0"
+  }
+}

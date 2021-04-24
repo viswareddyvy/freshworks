@@ -1,0 +1,146 @@
+/* @import url(); */
+
+
+body {
+  background-color: #d9ebf3;
+  line-height: 1;
+  color: black;
+}
+
+.fresh{
+  margin-left:5%
+}
+
+.welcome {
+  text-align: center;
+}
+
+.thanks {
+  text-align: center;
+  font-size: 30px;
+  color: green;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top:4%;
+}
+
+h1 {
+  text-align: left;
+  font-size: 35px;
+  margin-left: 4px;
+}
+
+label {
+  display: inline;
+}
+
+h3,
+#next {
+  margin-left: 5%;
+  text-align: center;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+#next {
+  margin-right: 10%;
+  margin-left: auto;
+  border-radius: 10%;
+}
+
+#result {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #036;
+}
+
+input[name="option"] {
+  float: left;
+}
+
+#form div {
+  margin-left: 10%;
+  max-width: 205px;
+}
+
+#container {
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 1em;
+  background-color: #5672f9;
+  text-decoration: none !important;
+  color: white !important;
+}
+
+#back {
+  color: blue !important;
+  background-color: white;
+  margin-left: 5%;
+  border-radius: 10%;
+}
+
+textarea {
+  height: 80px;
+  width: 230px;
+}
+
+.fas.right {
+  padding-left: 10px;
+}
+
+.proceed {
+  marign-bottom: -5px;
+}
+
+.proceed,
+.next,
+.back {
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+.welcome h2 {
+  margin-right: 30%;
+}
+
+.welcome p {
+  margin-right: 8%;
+}
+
+.welcome button {
+  margin-right: 27%;
+}
+
+.rating {
+  background:#f7eaea;
+  display:inline-block;
+  border:1px solid #9f8d21;
+  padding:10px;
+  border-radius:10px;
+  color: #c39411;
+}
+
+.rating span {
+  padding-right:10px;
+  cursor: pointer;
+}
+
+.selected {
+  background:white;
+  padding:5px;
+  border-radius:10px;
+  color:black;
+}
+
+label {
+  margin-left: 5px;
+}

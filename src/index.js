@@ -1,80 +1,12 @@
-let jq = document.createElement("script");
-
-jq.addEventListener("load", proceed); 
-jq.src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js";
-document.querySelector("head").appendChild(jq);
-
-
-jq.addEventListener("load", proceed); 
-jq.src = "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js";
-document.querySelector("head").appendChild(jq);
- jq = document.createElement("script");
-var $
-function proceed () {
-
-var jsonData = {
-    questions: [
-      {
-        type: "rating",
-        question: "How do you rate the delivery experience?",
-        options: [
-          {
-            text: "Great",
-            points: "10"
-          },
-          {
-            text: "Not so Great",
-            points: "5"
-          },
-          {
-            text: "Awful",
-            points: "0"
-          }
-        ]
-      },
-      {
-        type: "rating",
-        question: "How do you rate the Freshness of the fruits?",
-        options: [
-          {
-            text: "Great",
-            value: "10"
-          },
-          {
-            text: "Not so Great",
-            value: "5"
-          },
-          {
-            text: "Awful",
-            value: "0"
-          }
-        ]
-      },
-      {
-        type: "boolean",
-        question: "Would you order again?",
-        options: [
-          {
-            text: "Yes, Definitely",
-            value: true
-          },
-          {
-            text: "Not so Great",
-            value: false
-          }
-        ]
-      },
-      {
-        type: "text",
-        question: "Any comments?"
-      }
-    ]
-  };
+var $ = require("jquery");
+var a = require("./index.css");
+var b = require("@fortawesome/fontawesome-free/js/all.js");
+  var jsonData = require("./mockdata.json");
   var allQuestions = jsonData.questions;
   var currentquestion = 0;
   var draftResponse = [];
   var feedbackResponses = [];
-  
+  let selectedRating;
   
   /** setup the questions and options 
       will be triggering when ever there is change in question
@@ -122,30 +54,28 @@ var jsonData = {
   
   function appendRatingHtmlContent(options) {
     var formHtml = "";
+    formHtml += '<div class="rating">';
     for (var i = 0; i < options.length; i++) {
-      formHtml +=
-        '<div><input type="radio" name="option" value="' +
-        i +
-        '" class="options"><label for="option' +
-        i +
-        '">' +
-        options[i].text +
-        "</label></div><br/>";
+      formHtml += "<span >" + options[i].text + "</span>";
     }
+    formHtml += "</div>";
     return formHtml;
   }
   
   function storeAns(qType) {
-    const feedbackResponse = {question:'',response:''}
+    const feedbackResponse = { question: "", response: "" };
     const questionObj = allQuestions[currentquestion];
     if (qType == "boolean") {
       (feedbackResponse.question = questionObj.question),
         (feedbackResponse.response =
           questionObj.options[$("input[name=option]:checked").val()]);
     } else if (qType == "rating") {
+      debugger;
+        let optionalVal = '';
+       if(selectedRating)
+       optionalVal = selectedRating.innerHTML || '';
       (feedbackResponse.question = questionObj.question),
-        (feedbackResponse.response =
-          questionObj.options[$("input[name=option]:checked").val()]);
+        (feedbackResponse.response = optionalVal);
     } else {
       (feedbackResponse.response = allQuestions[currentquestion].question),
         (feedbackResponse.response = $("textarea").val());
@@ -172,13 +102,13 @@ var jsonData = {
       /* On proceed fetch the data if we have stored any in local storage
       urrently comment as codepen having issue in accessing localstorage */
       //getItemFromLocalStorage();
-      
+  
       $jumbotron.fadeIn();
       $(this).hide();
       $welcome.hide();
     });
+    addDeligationListener();
     setupQuestionAndOptions();
-  
     $next.click(function () {
       event.preventDefault();
       storeAns(allQuestions[currentquestion].type);
@@ -192,6 +122,7 @@ var jsonData = {
             $(".thanks").html("Thank You");
             $result.html("Thanks for helping us to impove").hide();
             $result.fadeIn(1500);
+            postDatatoApiCall(JSON.stringify(feedbackResponses));
           });
         }
       }
@@ -213,16 +144,45 @@ var jsonData = {
      Need to enable cookies in chrome settings to allow localstorage access
    */
   
-  function setItemTolocalStorage (){
-    localStorage.setItem("feedbackResponses",      JSON.stringify(feedbackResponses));
+  function setItemTolocalStorage() {
+    localStorage.setItem("feedbackResponses", JSON.stringify(feedbackResponses));
+  }
+  
+  function postDatatoApiCall(data) {
+    // Update the below url to actual API
+    $.post(
+      "https://jsonplaceholder.typicode.com/posts",
+      data,
+      function (data, status) {
+        alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+      }
+    );
+  }
+  
+  function getItemFromLocalStorage() {
+    localStorage.getItem("feedbackResponses", (result) => {
+      draftResponse = result.feebackResponses;
+    });
+  }
+  
+  function addDeligationListener() {
+    $("form").click(function (event) {
+      //Event deligation technique used here
+      let target = event.target;
+      if (target.tagName != "SPAN") return;
+      highlight(target);
+    });
+  }
+  
+  function highlight(option) {
+    if (selectedRating) {
+      selectedRating.classList.remove("selected");
+    }
+    selectedRating = option;
+    selectedRating.classList.add("selected");
   }
 
+exports.fun = function(a, b ) {
+    return a + b;
 }
-  // function getItemFromLocalStorage() {
-  //     localStorage.getItem("feedbackResponses", (result)=>{
-  //       draftResponse = result.feebackResponses;
-  //     });
-  // }
-  
-} 
-  
+ 
