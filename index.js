@@ -1,17 +1,17 @@
+/* setup plugins */
 let jq = document.createElement("script");
 
 jq.addEventListener("load", proceed); 
 jq.src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js";
 document.querySelector("head").appendChild(jq);
 
-
 jq.addEventListener("load", proceed); 
 jq.src = "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js";
 document.querySelector("head").appendChild(jq);
- jq = document.createElement("script");
+jq = document.createElement("script");
 var $
-function proceed () {
 
+function proceed () {
 var jsonData = {
     questions: [
       {
