@@ -1,7 +1,3 @@
-
-
-
-
 var $ = require("jquery");
 var jsonData = require("./mockdata.json");
 var jsdom = require("jsdom");
